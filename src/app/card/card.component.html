@@ -1,0 +1,64 @@
+<div class="card">
+  <h2
+    [ngStyle]="{
+      color: card.title.length > 15 ? 'blue' : 'red',
+      fontWeight: card.title.length > 15 ? 700 : 300
+    }"
+  >
+    #{{ index }} {{ card.title }}
+  </h2>
+  <div class="buttons">
+    <button (click)="changeTitle()">Change title</button>
+    <button (click)="card.title = 'Inline title'">Change title inline</button>
+  </div>
+  <div class="buttons">
+    <button (click)="textColor = 'blue'">Set Blue</button>
+    <button (click)="textColor = 'green'">Set green</button>
+    <button (click)="textColor = 'red'">Set red</button>
+  </div>
+  <p
+    class="text"
+    [ngClass]="{
+      blue: textColor === 'blue',
+      red: textColor === 'red',
+      green: textColor === 'green'
+    }"
+  >
+    {{ card.text }}
+  </p>
+
+  <p
+    class="text"
+    [class.blue]="textColor === 'blue'"
+    [class.red]="textColor === 'red'"
+    [class.green]="textColor === 'green'"
+  >
+    {{ card.text }}
+  </p>
+  <div>
+    <input
+      type="text"
+      [(ngModel)]="card.text"
+      (ngModelChange)="changeHandler()"
+    />
+  </div>
+
+  <hr />
+  <div>
+    <strong>{{ cardDate | date: "dd MMM yyyy HH:mm:ss" }}</strong>
+    <br />
+    <strong>{{ cardDate | date: "dd MMM yyyy HH:mm:ss":null:"ru" }}</strong>
+  </div>
+  <hr />
+
+  <strong>Number: {{ number }}</strong>
+  <em>{{ array }}</em>
+  <pre>{{ obj | json }}</pre>
+  <p>{{ getInfo() }}</p>
+
+  <div>
+    <img [src]="imgUrl" alt="img" />
+    <br />
+    <button [disabled]="disabled">Enable</button>
+  </div>
+</div>
